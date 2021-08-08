@@ -1,0 +1,76 @@
+﻿@model IEnumerable<EV.ViewModel.ImmigrantsVM>
+
+<div class="card-content pb-1">
+    <h4 class="card-title mb-0">
+        All Immigration Records
+        <a href="@Url.Action("Create", "Immigrants")" class="mb-1 btn btn-floating pulse float-right">
+            <i class="material-icons" style="line-height:40px">add</i>
+        </a>
+    </h4>
+</div>
+
+<table class="subscription-table responsive-table highlight">
+    <thead>
+        <tr>
+            <th> SL# </th>
+            <th> Image </th>
+            <th> Name </th>
+            <th> Passport </th>
+            <th> Nationality </th>
+            <th> Birth Date </th>
+            <th> Gender </th>
+            <th> Purpose</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i+1 }))
+        {
+        <tr id="tr-@item.Index">
+            <td>
+                @item.Index
+            </td>
+            <td>
+                <img alt="" src="@Url.Action(@Html.DisplayFor(m=>item.Data.iImage).ToString(), "Images")" height="40" width="40" class="photo" />
+            </td>
+            <td>
+                @item.Data.iName
+            </td>
+            <td>
+                @item.Data.iPassNo
+            </td>
+            <td>
+                @item.Data.iNationality
+            </td>
+            <td>
+                @item.Data.iDob.ToString("MMMM dd, yyyy")
+            </td>
+            <td>
+                @if (item.Data.iGender.ToString() == "Male")
+                {
+                    <span class="badge green lighten-5 green-text text-accent-2">Male</span>
+                }
+                @if (item.Data.iGender.ToString() == "Female")
+                {
+                    <span class="badge pink lighten-5 pink-text text-accent-2">Female</span>
+                }
+            </td>
+            <td>
+                @item.Data.iPurpose
+            </td>
+            <td class="">
+                <a href="@Url.Action("Edit","Immigrants", new { id=item.Data.iId })">
+                    <i class="material-icons pink-text">edit</i>
+                </a>
+                <a href="@Url.Action("Details","Immigrants", new { id=item.Data.iId })">
+                    <i class="material-icons pink-text">visibility</i>
+                </a>
+                <a id="btnDelete-@item.Index" class="btnDelete" href="@Url.Action("Delete","Immigrants", new { id=item.Data.iId })">
+                    <i class="material-icons pink-text">clear</i>
+                </a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,12 @@
+@keyframes highlight {
+    0% {
+        background: #ff4081;
+    }
+    100% {
+        background: none;
+    }
+}
+.highlight {
+    animation: highlight 2s;
+}
+

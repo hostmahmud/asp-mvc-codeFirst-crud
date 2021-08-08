@@ -1,0 +1,205 @@
+﻿@model EV.Models.Immigrants
+
+@{
+    ViewBag.Title = "Create New Record";
+}
+
+<div class="row">
+    <div class="col s12 m8 l8 offset-m2 offset-l2">
+        <div id="basic-form" class="card card card-default scrollspy">
+            <div class="card-content">
+
+                <div class="row">
+                    <h4 class="card-title">
+                        New Immigration Record
+                        <div class="float-right">
+                            <a href="@Url.Action("Index", "Immigrants")" class="mb-1 btn-floating waves-effect waves-light gradient-45deg-green-teal gradient-shadow float-right">
+                                <i class="material-icons" style="line-height:40px">arrow_back</i>
+                            </a>
+                        </div>
+                    </h4>
+                </div>
+
+                @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "msg", OnComplete = "clearAll" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+                        <hr class="mt-2 pink border-none" style="height:2px" />
+                        @Html.ValidationSummary(true, "", new { @class = "pink-text" })
+                        <div class="row">
+                            <div class="input-field s6 col">
+                                @Html.LabelFor(model => model.iName, htmlAttributes: new { @class = "" })
+                                @Html.EditorFor(model => model.iName, new { htmlAttributes = new { @class = "" } })
+                                @Html.ValidationMessageFor(model => model.iName, "", new { @class = "pink-text" })
+                            </div>
+                            <div class="input-field col s12 m6 l6">
+                                @Html.DropDownList("nCountryId", null, "--Nationality--")
+                                @Html.ValidationMessageFor(model => model.nCountryId, "", new { @class = "pink-text" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m6 l6">
+                                @Html.LabelFor(model => model.iPassNo, htmlAttributes: new { @class = "" })
+                                @Html.EditorFor(model => model.iPassNo, new { htmlAttributes = new { @class = "" } })
+                                @Html.ValidationMessageFor(model => model.iPassNo, "", new { @class = "pink-text" })
+                            </div>
+                            <div class="input-field s6 col">
+                                @Html.EditorFor(model => model.iDob, new { htmlAttributes = new { @class = "", @id = "iDob", @type = "date" } })
+                                @Html.LabelFor(model => model.iDob, htmlAttributes: new { @for = "iDob" })
+                                @Html.ValidationMessageFor(model => model.iDob, "", new { @class = "pink-text" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <p style=" padding-top: 11px; padding-bottom: 11px; border-bottom: 1px solid rgb(158, 158, 158);">
+                                    <label class="mr-2">
+                                        @Html.RadioButtonFor(model => model.iGender, "Male", new { @checked = "checked", }) <span>Male</span>
+                                    </label>
+                                    <label>
+                                        @Html.RadioButtonFor(model => model.iGender, "Female") <span>Female</span>
+                                    </label>
+                                </p>
+                                @Html.ValidationMessageFor(model => model.iGender, "", new { @class = "pink-text" })
+                            </div>
+                            <div class="input-field col s6">
+                                @Html.DropDownList("iPurpose", new List<SelectListItem>()
+                               {
+                                   new SelectListItem(){ Text= "Job", Value = "Job"},
+                                   new SelectListItem(){ Text= "Study", Value = "Study2"},
+                                   new SelectListItem(){ Text= "Visit", Value = "Visit"}
+                               }, "--Select Purpose--")
+                                @Html.ValidationMessageFor(model => model.iPurpose, "", new { @class = "pink-text" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s12 m6 l6">
+                                @Html.DropDownList("iImmiType", new List<SelectListItem>()
+                               {
+                                   new SelectListItem(){ Text= "In", Value = "In"},
+                                   new SelectListItem(){ Text= "Out", Value = "Out"}
+                               }, "--Select Type--", new { @class = "iImmiType" })
+                                @Html.ValidationMessageFor(model => model.iImmiType, "", new { @class = "pink-text" })
+                            </div>
+                            <div class="input-field col s12 m6 l6 hidenormal showIn">
+                                @Html.DropDownList("dCountryId", null, "--Departure Country--")
+                                @Html.ValidationMessageFor(model => model.dCountryId, "", new { @class = "pink-text" })
+                            </div>
+                            <div class="input-field col s12 m6 l6 hidenormal showOut">
+                                @Html.DropDownList("aCountryId", null, "--Arrival Country--")
+                                @Html.ValidationMessageFor(model => model.aCountryId, "", new { @class = "pink-text" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col s12 m6 l6">
+                                <div class="file-field input-field">
+                                    <div class="btn">
+                                        <span>File</span>
+                                        <input type="file" name="File" id="File">
+                                        @Html.EditorFor(model => model.iImage, new { htmlAttributes = new { @class = "", @style = "display:none", @id = "fileName" } })
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text">
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.iImage, "", new { @class = "pink-text" })
+                                </div>
+                                <div class="input-field">
+                                    @Html.EditorFor(model => model.iDate, new { htmlAttributes = new { @class = "", @id = "iDate", @type = "date" } })
+                                    @Html.LabelFor(model => model.iDate, htmlAttributes: new { @for = "iDate" })
+                                    @Html.ValidationMessageFor(model => model.iDate, "", new { @class = "pink-text" })
+                                </div>
+                            </div>
+                            <div class="col s4">
+                                <img class="col m12 l12" id="ImagePreview" src="~/Images/banner.png" height="150" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col s12 mt-5">
+                                <button class="btn btn-default" type="submit" id="btnCreate">
+                                    Create <div class="preloader-wrapper small active" style="display:none" id="progress">
+                                        <div class="spinner-layer spinner-green-only">
+                                            <div class="circle-clipper left">
+                                                <div class="circle"></div>
+                                            </div><div class="gap-patch">
+                                                <div class="circle"></div>
+                                            </div><div class="circle-clipper right">
+                                                <div class="circle"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                                <span id="msg"></span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/DateValidator.js"></script>
+    <script>
+        function clearAll() {
+            $("#form0").trigger("reset");
+            $("body").scrollTop(0);
+            $("#ImagePreview").attr("src", "/Images/banner.png");
+        }
+        $("#File").change(function () {
+            var file = $("input[type=file]").get(0).files[0];
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function () {
+                    $("#ImagePreview").attr("src", reader.result);
+                    $("#fileName").val(file);
+                }
+                reader.readAsDataURL(file);
+            }
+        })
+        $("#form0").attr("enctype", "multipart/form-data");
+
+    </script>
+    <script>
+        $("#btnCreate").click(function (e) {
+            e.preventDefault();
+            $(".preloader-wrapper").attr("style", "width: 1.4rem; height: 1.4rem; margin-left: 10px; margin-bottom: -5px;display:inline-block");
+            $("#btnCreate").attr("disabled", "disabled")
+            setTimeout(function () {
+                $("#form0").submit();
+                $(".preloader-wrapper").attr("style", "width: 1.4rem; height: 1.4rem; margin-left: 10px; margin-bottom: -5px;display:none")
+                $("#btnCreate").removeAttr("disabled")
+            }, 2000);
+        });
+    </script>
+    <script>
+        $(".hidenormal").hide();
+        $('.iImmiType').change(function () {
+            if ($('.iImmiType').val() == 'In') {
+                $('.showIn').addClass("highlight");
+                setTimeout(function () {
+                    $('.showIn').removeClass('highlight');
+                }, 2000);
+                $('.showIn').fadeIn(800);
+                $('.showOut').hide();
+            } else if ($('.iImmiType').val() == 'Out') {
+                $('.showOut').addClass("highlight");
+                setTimeout(function () {
+                    $('.showOut').removeClass('highlight');
+                }, 2000);
+                $('.showIn').hide();
+                $('.showOut').fadeIn(800);
+            } else {
+                $(".hidenormal").fadeOut();
+            }
+        });
+    </script>
+}
+

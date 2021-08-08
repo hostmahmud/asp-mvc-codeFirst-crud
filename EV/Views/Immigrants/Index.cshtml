@@ -1,0 +1,52 @@
+﻿@model IEnumerable<EV.ViewModel.ImmigrantsVM>
+
+@{
+    ViewBag.Title = "Record List";
+}
+
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div class="card subscriber-list-card animate fadeRight">
+            
+            @Html.Partial("_List", Model)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $('.btnDelete').on('click', function (event) {
+            event.preventDefault();
+            const url = $(this).attr('href');
+            const id = $(this).closest('tr').attr('id');
+            swal({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this record after deletion!',
+                icon: 'warning',
+                buttons: ["Cancel", "Yes!"],
+            }).then(function (value) {
+                if (value) {
+                    swal({
+                        title: 'Please wait',
+                        text: 'This item is being deleted!',
+                        icon: 'info',
+                        buttons: false,
+                    });
+                    $.ajax({
+                        url: url,
+                        type: 'GET',
+                        dataType: 'html'
+                    }).done(function (data) {
+                        setTimeout(function () {
+                            swal("Deleted!", "The record has been deleted.", "success").then(function () {
+                                $("tr[id='" + id + "']").remove();
+                            });
+                        }, 3000);
+                    }).fail(function () {
+                        swal("Deleted_Error", "Error while deleting. :(", "error");
+                    });
+                }
+            });
+        });
+    </script>
+}

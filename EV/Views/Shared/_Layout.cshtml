@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title>@ViewBag.Title</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- BEGIN: VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../Content/vendors/vendors.min.css">
+    <link href="~/Content/vendors/select2/select2.min.css" rel="stylesheet" />
+    <link href="~/Content/vendors/select2/select2-materialize.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../../../Content/vendors/animate-css/animate.css">
+    <link rel="stylesheet" type="text/css" href="../../../Content/vendors/chartist-js/chartist.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../Content/vendors/chartist-js/chartist-plugin-tooltip.css">
+    <!-- END: VENDOR CSS-->
+    <!-- BEGIN: Page Level CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../Content/css/themes/vertical-modern-menu-template/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../Content/css/themes/vertical-modern-menu-template/style.min.css">
+
+    <link rel="stylesheet" type="text/css" href="../../../Content/css/pages/dashboard-modern.css">
+    <!-- END: Page Level CSS-->
+    <link href="~/Content/css/pages/form-select2.min.css" rel="stylesheet" />
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../Content/css/custom/custom.css">
+
+    <!-- END: Custom CSS-->
+    <style type="text/css">
+        .brand-sidebar span.logo-text {
+            position: absolute;
+            top: 32px;
+        }
+
+        .brand-sidebar .brand-logo {
+            padding: 5px 12px 5px 22px;
+        }
+
+        .brand-sidebar .logo-wrapper a.brand-logo img {
+            height: 50px;
+        }
+
+        .avatar-status img {
+            margin-top: 8px;
+            height: 28px;
+        }
+
+        .avatar-status {
+            display: flex;
+            margin-top: 10px;
+        }
+
+            .avatar-status i {
+                bottom: 9px;
+            }
+    </style>
+    @RenderSection("styles", required: false)
+
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu preload-transitions 2-columns   " data-open="click" data-menu="vertical-modern-menu" data-col="2-columns">
+
+    <!-- BEGIN: Header-->
+    <header class="page-topbar" id="header">
+        <div class="navbar navbar-fixed">
+            <nav class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-indigo-purple no-shadow">
+                <div class="nav-wrapper">
+                    <div class="header-search-wrapper hide-on-med-and-down" style="width: calc(100% - 500px);">
+                        <i class="material-icons">search</i>
+                        <input class="header-search-input z-depth-2" type="text" name="Search" placeholder="Explore Materialize" data-search="template-list">
+                        <ul class="search-list collection display-none"></ul>
+                    </div>
+                    <ul class="navbar-list right">
+                        @if (Session["fname"] != null)
+                        {
+                            <li>
+                                <a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown" style="width:120px">
+                                    <span class="avatar-status avatar-online">
+                                        <img src="~/Images/av.png" alt="avatar" class="mr-10"><i></i>
+                                        <span>@Session["fname"].ToString()</span>
+                                    </span>
+                                </a>
+                                <ul class="dropdown-content" id="profile-dropdown" tabindex="0" style="">
+                                    <li tabindex="0">
+                                        <a class="grey-text text-darken-1" href="@Url.Action("Logout","User")">
+                                            <i class="material-icons">keyboard_tab</i> Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+
+                        <li class="hide-on-med-and-down"><a class="waves-effect waves-block waves-light toggle-fullscreen" href="javascript:void(0);"><i class="material-icons">settings_overscan</i></a></li>
+
+
+                    </ul>
+
+                </div>
+                <nav class="display-none search-sm">
+                    <div class="nav-wrapper">
+                        <form id="navbarForm">
+                            <div class="input-field search-input-sm">
+                                <input class="search-box-sm mb-0" type="search" required="" id="search" placeholder="Explore Materialize" data-search="template-list">
+                                <label class="label-icon" for="search"><i class="material-icons search-sm-icon">search</i></label><i class="material-icons search-sm-close">close</i>
+                                <ul class="search-list collection search-list-sm display-none"></ul>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+            </nav>
+        </div>
+    </header>
+
+    <!-- BEGIN: SideNav-->
+    <aside class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-light sidenav-active-square">
+        <div class="brand-sidebar">
+            <h1 class="logo-wrapper"><a class="brand-logo darken-1" href="/"><img class="hide-on-med-and-down" src="~/Images/idb-bisew.png" alt="logo" /><img class="show-on-medium-and-down hide-on-med-and-up" src="~/Images/idb-bisew.png" alt="logo" /><span class="logo-text hide-on-med-and-down">IsDB-BISEW</span></a><a class="navbar-toggler" href="#"><i class="material-icons">radio_button_checked</i></a></h1>
+        </div>
+        <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="menu-accordion">
+            <li class="bold">
+                <a class="waves-effect waves-cyan @ViewBag.Dactive" href="~/Immigrants/">
+                    <i class="material-icons">settings_input_svideo</i>
+                    <span class="menu-title" data-i18n="Dashboard">Immigrations</span>
+                </a>
+            </li>
+            <li class="bold">
+                <a class="waves-effect waves-cyan @ViewBag.Cactive" href="~/Countries/">
+                    <i class="material-icons">dvr</i>
+                    <span class="menu-title" data-i18n="Dashboard">Countries</span>
+                </a>
+            </li>
+        </ul>
+        <div class="navigation-background"></div><a class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only" href="#" data-target="slide-out"><i class="material-icons">menu</i></a>
+    </aside>
+    <!-- END: SideNav-->
+    <!-- BEGIN: Page Main-->
+    <div id="main">
+        <div class="row">
+            <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
+            <div class="col s12">
+                <div class="container">
+                    <div class="section">
+                        @RenderBody()
+                    </div>
+
+                </div>
+                <div class="content-overlay"></div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Page Main-->
+    <!-- BEGIN: Footer-->
+    <footer class="page-footer footer footer-static footer-dark gradient-45deg-indigo-purple gradient-shadow navbar-border navbar-shadow">
+        <div class="footer-copyright">
+            <div class="container">&copy; 2021 IsDB-BISEW. All rights reserved.</div>
+        </div>
+    </footer>
+    <!-- END: Footer-->
+    <!-- BEGIN VENDOR JS-->
+    <script src="../../../Content/js/vendors.min.js"></script>
+    <!-- BEGIN VENDOR JS-->
+    <script src="~/Content/vendors/select2/select2.full.min.js"></script>
+    <!-- BEGIN PAGE VENDOR JS-->
+    <script src="../../../Content/vendors/chartjs/chart.min.js"></script>
+    <script src="../../../Content/vendors/chartist-js/chartist.min.js"></script>
+    <script src="../../../Content/vendors/chartist-js/chartist-plugin-tooltip.js"></script>
+    <script src="../../../Content/vendors/chartist-js/chartist-plugin-fill-donut.min.js"></script>
+    <script src="~/Content/vendors/sweetalert/sweetalert.min.js"></script>
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN THEME  JS-->
+    <script src="../../../Content/js/plugins.min.js"></script>
+    <script src="../../../Content/js/search.min.js"></script>
+    <script src="../../../Content/js/custom/custom-script.min.js"></script>
+    <script src="../../../Content/js/scripts/customizer.min.js"></script>
+    <!-- END THEME  JS-->
+    <script src="~/Content/js/scripts/form-select2.min.js"></script>
+    <script src="~/Content/js/scripts/extra-components-sweetalert.min.js"></script>
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script src="../../../Content/js/scripts/dashboard-modern.js"></script>
+    <script src="../../../Content/js/scripts/intro.min.js"></script>
+    <!-- END PAGE LEVEL JS-->
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

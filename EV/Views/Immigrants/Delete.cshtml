@@ -1,0 +1,112 @@
+﻿@model EV.Models.Immigrants
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Immigrants</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.aCountry.cName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.aCountry.cName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dCountry.cName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dCountry.cName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nCountry.cName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nCountry.cName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iPassNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iPassNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iDob)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iDob)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iGender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iGender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iPurpose)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iPurpose)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iImmiType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iImmiType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iImage)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

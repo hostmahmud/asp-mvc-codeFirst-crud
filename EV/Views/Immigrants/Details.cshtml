@@ -1,0 +1,74 @@
+﻿@model EV.Models.Immigrants
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div id="horizontal-card" class="section">
+    <div class="row">
+        <div class="col s12 m10 l10 offset-m1 offset-l1">
+            <div class="card horizontal">
+                <div class="card-image">
+                    <img src="@Url.Action(@Html.DisplayFor(model => model.iImage).ToString(), "Images")" alt="image" />
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <h5> @Html.DisplayFor(model => model.iName)</h5>
+                        <p>
+                            Nationality:
+                            <span class="green-text">@Html.DisplayFor(model => model.nCountry.cName)</span>
+                        </p>
+                        <p>
+                            Passport No.:
+                            <span class="green-text">@Html.DisplayFor(model => model.iPassNo)</span>
+                        </p>
+                        <p>
+                            Gender:
+                            @if (Model.iGender.ToString() == "Male")
+                            {
+                                <span class=" green lighten-5 green-text text-accent-2">Male</span>
+                            }
+                            @if (Model.iGender.ToString() == "Female")
+                            {
+                                <span class=" pink lighten-5 pink-text text-accent-2">Female</span>
+                            }
+                        </p>
+                        <ul class="list-bullet" style="padding-left: 15px;">
+                            <li class="list-item-bullet" style="list-style-type:disc">
+                                <span class="green-text">Visit Type: </span>@Html.DisplayFor(model => model.iImmiType)
+                            </li>
+                            @if (Model.dCountry != null)
+                            {
+                                <li class="list-item-bullet" style="list-style-type:disc">
+                                    <span class="green-text">Departure Country: </span>@Html.DisplayFor(model => model.dCountry.cName)
+                                </li>
+                            }
+                            @if (Model.aCountry != null)
+                            {
+                                <li class="list-item-bullet" style="list-style-type:disc">
+                                    <span class="green-text">Arrival Country: </span>@Html.DisplayFor(model => model.aCountry.cName)
+                                </li>
+                            }
+                            <li class="list-item-bullet" style="list-style-type:disc">
+                                <span class="green-text">Date of Birth: </span>@Html.DisplayFor(model => model.iDob)
+                            </li>
+                            <li class="list-item-bullet" style="list-style-type:disc">
+                                <span class="green-text">Visit Purpose: </span>@Html.DisplayFor(model => model.iPurpose)
+                            </li>
+                        </ul>
+                        <p>
+                            Record Date:
+                            <span class="red-text">@Model.iDate.ToString("MMMM dd, yyyy")</span>
+                        </p>
+                        <p class="mt-2 float-right">
+                            @Html.ActionLink("Edit", "Edit", new { id = Model.iId }, new { @class = "btn btn-small waves-effect waves-light gradient-45deg-amber-amber" })
+                            @Html.ActionLink("Back", "Index", "", new { @class = "btn btn-small waves-effect waves-light gradient-45deg-light-blue-cyan" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

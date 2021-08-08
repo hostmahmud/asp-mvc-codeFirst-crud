@@ -1,0 +1,83 @@
+﻿@model EV.Models.Users
+
+@{
+    ViewBag.Title = "User Registration";
+}
+<style>
+    div#main {
+        padding-left: 0;
+    }
+    aside {
+        display: none;
+    }
+    nav .nav-wrapper {
+        display: none;
+    }
+</style>
+
+<div class="row">
+    <div class="col s12 m6 l6 offset-m3 offset-l3">
+        <div id="basic-form" class="card card card-default scrollspy">
+            <div class="card-content">
+                <div class="row">
+                    <h4 class="card-title">
+                        New user registration
+                    </h4>
+                </div>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+                        <hr class="mt-2 pink border-none" style="height:2px" />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="row">
+                            <div class="input-field s6 col">
+                                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="input-field s6 col">
+                                @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field s12 col">
+                                @Html.LabelFor(model => model.EmailID, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.EmailID, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.EmailID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field s12 col">
+                                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field s12 col">
+                                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Register" class="btn btn-default" /> @Html.ActionLink("Back to Login", "Login")
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,77 @@
+﻿@model EV.Models.Users
+@{
+    ViewBag.Title = "User Login";
+}
+<style>
+    div#main {
+        padding-left: 0;
+    }
+
+    aside {
+        display: none;
+    }
+
+    nav .nav-wrapper {
+        display: none;
+    }
+</style>
+
+<div class="col s12 m4 l4 offset-m4 offset-l4 z-depth-4 card-panel border-radius-6 login-card">
+    @using (Html.BeginForm("Login", "User", FormMethod.Post, new { @class = "login-form" }))
+    {
+        <div class="row">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @if (@ViewBag.Message != null)
+            {
+                <div style="border: 1px solid red">
+                    @ViewBag.Message
+                </div>
+            }
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <h5 class="ml-4">Sign in</h5>
+            </div>
+        </div>
+        <div class="row margin">
+            <div class="input-field col s12">
+                <i class="material-icons prefix pt-2">person_outline</i>
+                @Html.TextBoxFor(a => a.EmailID, new { @id = "emailid",@class="pl-2" })
+                @Html.LabelFor(a => a.EmailID, new { @class = "center-align", @for = "username" })
+                @Html.ValidationMessageFor(a => a.EmailID, "", new { @class = "pink-text ml-9" })
+            </div>
+        </div>
+        <div class="row margin">
+            <div class="input-field col s12">
+                <i class="material-icons prefix pt-2">lock_outline</i>
+                @Html.PasswordFor(a => a.Password, new { @id = "password", @class = "pl-2" })
+                @Html.LabelFor(a => a.Password, new { @for = "password" })
+                @Html.ValidationMessageFor(a => a.Password, "", new { @class="pink-text ml-9"})
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m12 l12 ml-2 mt-1">
+                <p>
+                    <label>
+                        <input type="checkbox" />
+                        <span>Remember Me</span>
+                    </label>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <button type="submit" class="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12">
+                    Login
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6 m6 l6">
+                <p class="margin medium-small"><a href="@Url.Action("Registration","User")">Register Now!</a></p>
+            </div>
+        </div>
+    }
+</div>
+
